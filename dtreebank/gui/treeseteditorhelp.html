@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <style type="text/css">
+      span.expr {font-family:Monospace;background-color:#f0f0f0;font-weight:bold;}
+      span.dtype {font-style:italic;}
+      dt.norm {text-decoration:underline;}
+    </style>
+  </head>
+<body>
+<h1>Opening treeset files</h1>
+<p>You can use <b>File/Open File(s)</b> to open one or several individual <i>.xml</i> treeset files. Alternatively, you can use <b>File/Open Folder</b> to select a single folder. All .xml files found anywhere under the selected folder will be opened. Treeseteditor always works with one active treeset file. To switch the file, choose a new file from the <b>Treeset</b> menu.</p>
+<h1>Editing trees</h1>
+<h2>Mouse actions</h2>
+<dl>
+<dt><span class="expr">LeftButton on dependency</span></dt><dd>Selects the dependency.</dd>
+<dt><span class="expr">Shift+LeftButton on dependency</span></dt><dd>Selects the dependency without unselecting anything else. That way you can select a number of dependencies.</dd>
+<dt><span class="expr">LeftButton on token</span></dt><dd>Selects the token.</dd>
+<dt><span class="expr">Shift+LeftButton on token</span></dt><dd>Creates a dependency from a previously selected token to this token. Does nothing if no other token is selected.</dd>
+<dt><span class="expr">LeftButton in dependecy corner</span></dt><dd>The round corners of dependencies can be dragged left or right using the left mouse button. This allows for fast correction of the governor/dependent.</dd>
+</dl>
+<h2>Keyboard shortcuts</h2>
+<dl>
+<dt><span class="expr">insert</span></dt><dd>Inserts a *null* token to the left of the currently selected token. Does nothing if no token is selected.</dd>
+<dt><span class="expr">delete</span></dt><dd>Deletes all selected dependencies or *null* tokens. Non-null tokens cannot be deleted. Does nothing if no null tokens or dependencies are selected.</dd>
+<dt><span class="expr">left arrow</span></dt><dd>Makes all selected dependencies point left.</dd>
+<dt><span class="expr">right arrow</span></dt><dd>Makes all selected dependencies point right.</dd>
+<dt><span class="expr">space</span></dt><dd>Changes the dependency type of all selected dependencies.</dd>
+<dt><span class="expr">exclamation mark (!)</span></dt><dd>Flags/unflags all selected dependencies. A flagged dependency usually means &quot;must be checked&quot;.</dd>
+<dt><span class="expr">question mark (?)</span></dt><dd>Flips the value of the &quot;grammaticality&quot; flag of the whole tree. The value is a three-state and cycles as <i>no flag (grammatical) &gt; grammar-questionable &gt; ungrammatical</i>. To flag a tree <i>ungrammatical</i>, you thus need to press <span class="expr">?</span> twice.</dd>
+</dl>
+<h1>Searching</h1>
+<p>All trees that match the search criteria, from all open treesets, are displayed in the search dialog. These trees are fully editable. That way one can search for a particular phenomenon and edit all of its instances. Tree editing behaves correctly even if the same tree is displayed in several search dialogs (you can have any number of search dialgs open) and/or the main tree editor. The queries are given as graph search expressions, whose syntax is shown below.</p>
+<h1>Graph search expressions</h1>
+<h2>Expression syntax</h2>
+<p>The language is loosely inspired by TGrep2 and TRegex. The current version is still severly limited compared to these tools, though. The basic target of search is a token (graph node) with incoming/outgoing dependencies. Tokens are specified by regular expressions closed in two slashes <span class="expr">/.../</span>. Dependencies are expressed using <span class="expr">&lt;</span> and <span class="expr">&gt;</span> operators. These operators mimick &quot;arrows&quot; in the dependency graph. Here are the most simple cases:</p>
+<ul>
+<li><span class="expr">/on$/ &lt; /.*/</span> searches for all cases of <i>on</i> which are dependents of some token</li>
+<li><span class="expr">/on$/ &gt; /.*/</span> searches for all cases of <i>on</i> which are governors of some token</li>
+<li><span class="expr">/.*/ &lt; /on$/</span> searches for any token governed by <i>on</i></li>
+</ul>
+<p>Note that the left-most token in the expression is always the target of the search. There is an easier way of saying <span class="expr">/.*/</span> - one can use <span class="expr">_</span> (an underscore) instead. The underscore means &quot;any token&quot;. So, the previous three expressions could be written as:</p>
+<ul>
+<li><span class="expr">/on$/ &lt; _</span></li>
+<li><span class="expr">/on$/ &gt; _</span></li>
+<li><span class="expr">_ &lt; /on$/</span></li>
+</ul>
+<p>So far, you could only look for dependencies, regardless of type. The type of a dependency can be specified between two slashes right after the operators. The type specification is not a regular expression since the list of possible dependency types is quite limited. You can use the bar | to list several types, though.</p>
+<ul>
+<li><span class="expr">_ &lt;/cop/ _</span> searches for all words serving as a copula (are governed through a <span class="dtype">cop</span> dependency).</li>
+<li><span class="expr">_ &gt;/nsubj-cop/ _</span> searches for all words serving as a predicative in copula structures (have a copula subject).</li>
+<li><span class="expr">_ &lt;/nsubj|nsubj-cop/ _</span> searches for all words serving as a subject - both standard and copula subject.</li>
+</ul>
+<p>You can specify a number of dependency restrictions at a time by chaining the operators:</p>
+<ul>
+<li><span class="expr">_ &gt;/nsubj-cop/ _ &gt;/cop/ _</span> searches for all words that have both a copula subject and a copula verb as their dependents</li>
+<li><span class="expr">_ &lt;/nsubj-cop/ _ &gt;/nommod/ _</span> searches for all words that serve as a copula subject and are at the same time modified through a nommod dependency</li>
+</ul>
+<p>The restrictions can be closed between parentheses to mark priority:</p>
+<ul>
+<li><span class="expr">_ &gt;/cop/ (_ &gt/aux|auxpass/ _)</span> searches for words that serve as a predicative in copula structures, where the copula itself modifies an auxiliary</li>
+</ul>
+<p>There is a (currently still a bit limited) support for the negation operator <span class="expr">!</span>. Currently, you can negate the <span class="expr">&lt;</span> and <span class="expr">&gt;</span> operators as follows:</p>
+<ul>
+<li><span class="expr">_ &gt;/nsubj-cop/ _ !&gt;/cop/ _</span> searches for all copula predicatives (governors in <span class="dtype">nsubj-cop</span> dependencies) that do not have a copula verb (do not govern a <span class="dtype">cop</span> dependency).</li>
+<li><span class="expr">_ &gt;/cop/ _ !&gt;/cop/ /on/</span> searches for all copula predicatives (governors in <span class="dtype">cop</span> dependency - first half of the expression) that do not have a copula verb <i>on</i>. This query will be simplified once negation of word regular expressions will be introduced.</li>
+<li><span class="expr">_ &gt;/cop/ (_ !&gt;/aux|auxpass/ _)</span> searches for all copula predicatives where the copula itself is not modified by an auxiliary.</li> 
+</ul>
+<h2>Search recipes</h2>
+<dl>
+<dt class="norm">All dependencies of a given type</dt><dd>Since the search targets tokens, rather than dependencies, the easiest way to count these dependencies is to search for tokens that are dependents of a given dependency type: <span class="expr">_ &lt;/auxpass/ _</span> will find all passive auxiliaries</dd>
+<dt class="norm">Dependency chains</dt><dd>Say you want to find all two-word <span class="dtype">advcl</span> chains (<span class="dtype">advcl</span> nesting): <span class="expr">_ &gt;/advcl/ (_ &gt;/advcl/ _)</span>. Note that if you left the parentheses out, saying <span class="expr">_ &gt;/advcl/ _ &gt;/advcl/ _</span>, you'd be looking for words that have two <span class="dtype">advcl</span> dependents. WARNING: this is currently not completely finished, so the latter search (without parentheses) would also return words with just one <span class="dtype">advcl</span>, effectively counting the single dependent twice; this will be fixed at some point.</dd>
+<dt class="norm">Single token search</dt><dd>If you want to search for all occurences of an individual token, you can simply state a single regular expression as the search string. For example, <span class="expr">/koira/</span> will search for all words that start with the string <i>koira</i> (matching also <i>koiraa</i>, <i>koiran</i>, etc.). Anchor the end of the string with a <span class="expr">$</span> for an exact match: <span class="expr">/koira$/</span>.</dd>
+</dl>
+
+<h2>FinCG and FinTWOL integration</h2> For FinCG and FinTWOL (used
+automatically if the appropriate module is found), the search syntax
+extends the basic token definition syntax with the following
+tags: <span class="expr">@CGBASE @CGTAG @TWBASE @TWTAG</span> for
+(FinCG/FinTWOL baseform/tag). These are followed by a search
+expression enclosed in <span class="expr">/.../</span>. So, for
+example, you can search for a token whose FinCG baseform
+is <i>olla</i> as <span class="expr">@CGBASE/olla/</span>. This will
+match any token whose at least one FinCG reading has the
+baseform <i>olla</i>. The <span class="expr">@CGTAG</span> takes a
+list of FinCG tags joined by <span class="expr">&quot;+&quot;</span>
+and matches any token for which at least one FinCG reading has all
+these tags specified. So, for instance
+<span class="expr">@CGTAG/INF3+ABE/</span> searches for all tokens with
+the tags <i>INF3</i> and <i>ABE</i>.
+
+<br/><br/>
+
+All these token definitions can be freely combined with any other
+operators.  So you can be searching for <span class="expr">@CGTAG/N/
+>/nsubj/ _</span>, that is, all nouns which have a subject in order to
+find FinCG or annotation mistakes, etc. It is also possible to paste
+several restrictions on a single token, searching for tokens with a
+particular baseform and particular tags. So, for
+instance <span class="expr">@CGTAG/PCP2/@CGBASE/olla/</span> would
+search for all <i>PCP2</i> occurrences of <i>olla</i>. This search
+expression could also be said as
+<span class="expr">/olleen/@CGTAG/PCP2/</span> (restriction on token
+text followed by restriction on CG tag). The order of the restrictions
+does not matter.
+
+</body>
+</html>

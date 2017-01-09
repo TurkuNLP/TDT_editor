@@ -1,0 +1,10 @@
+-----
+@CGBASE/olla/
+/*null*/
+@TXTRE/.*ss[äÄ]$/
+-----
+_ >/nsubj/ _ >/nsubj-cop/ _
+@CGTAG/V+ACT/ !>/nsubj|nsubj-cop|xsubj/ _ !</aux|cop|auxpass|neg/ _
+-----
+/*null*/ !>/A=X|M-X/ _
+/*null*/ >/A=M-X&dobj/ _

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TreeSetEditor</class>
+ <widget class="QMainWindow" name="TreeSetEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>872</width>
+    <height>383</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resfile.qrc">
+    <normaloff>:/icons/icons/babelfish.png</normaloff>:/icons/icons/babelfish.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout">
+    <item>
+     <layout class="QHBoxLayout">
+      <item>
+       <spacer>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>421</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QProgressBar" name="progressBar">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximum">
+         <number>0</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="textVisible">
+         <bool>true</bool>
+        </property>
+        <property name="format">
+         <string>%v/%m</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="DTreeWidget" name="treeWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>872</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpenFile"/>
+    <addaction name="actionOpenFolder"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveall"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuNavigation">
+    <property name="title">
+     <string>Navigation</string>
+    </property>
+    <addaction name="actionFirst"/>
+    <addaction name="actionPrevious"/>
+    <addaction name="actionNext"/>
+    <addaction name="actionLast"/>
+    <addaction name="actionGotoTree"/>
+   </widget>
+   <widget class="TreeSetMenu" name="menuTreeset">
+    <property name="title">
+     <string>Treeset</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuSearch">
+    <property name="title">
+     <string>Search</string>
+    </property>
+    <addaction name="actionSearch"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionHelp"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuConfig">
+    <property name="title">
+     <string>Config</string>
+    </property>
+    <addaction name="actionText_editing"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuNavigation"/>
+   <addaction name="menuSearch"/>
+   <addaction name="menuConfig"/>
+   <addaction name="menuTreeset"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>16</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonIconOnly</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpenFile"/>
+   <addaction name="actionOpenFolder"/>
+   <addaction name="actionSave"/>
+   <addaction name="actionSaveall"/>
+   <addaction name="separator"/>
+   <addaction name="actionFirst"/>
+   <addaction name="actionPrevious"/>
+   <addaction name="actionNext"/>
+   <addaction name="actionLast"/>
+   <addaction name="actionGotoTree"/>
+   <addaction name="separator"/>
+   <addaction name="actionSearch"/>
+   <addaction name="separator"/>
+   <addaction name="actionUnflagAllDeps"/>
+   <addaction name="actionDeleteAllFlaggedDeps"/>
+   <addaction name="separator"/>
+   <addaction name="actionHelp"/>
+   <addaction name="separator"/>
+  </widget>
+  <widget class="QToolBar" name="timeBar">
+   <property name="windowTitle">
+    <string>toolBar_2</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>true</bool>
+   </attribute>
+   <addaction name="actionStartEditTiming"/>
+   <addaction name="actionStopEditTiming"/>
+   <addaction name="actionStopAtLastEdit"/>
+   <addaction name="separator"/>
+  </widget>
+  <action name="actionPrevious">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/1leftarrow.png</normaloff>:/icons/icons/1leftarrow.png</iconset>
+   </property>
+   <property name="text">
+    <string>Previous</string>
+   </property>
+  </action>
+  <action name="actionNext">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/1rightarrow.png</normaloff>:/icons/icons/1rightarrow.png</iconset>
+   </property>
+   <property name="text">
+    <string>Next</string>
+   </property>
+  </action>
+  <action name="actionFirst">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/2leftarrow.png</normaloff>:/icons/icons/2leftarrow.png</iconset>
+   </property>
+   <property name="text">
+    <string>First</string>
+   </property>
+  </action>
+  <action name="actionLast">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/2rightarrow.png</normaloff>:/icons/icons/2rightarrow.png</iconset>
+   </property>
+   <property name="text">
+    <string>Last</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/filesave.png</normaloff>:/icons/icons/filesave.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionOpenFile">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/filesopen.png</normaloff>:/icons/icons/filesopen.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open File(s)</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/fileclose.png</normaloff>:/icons/icons/fileclose.png</iconset>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </action>
+  <action name="actionSaveall">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/save_all.png</normaloff>:/icons/icons/save_all.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save All</string>
+   </property>
+  </action>
+  <action name="actionSearch">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/search.png</normaloff>:/icons/icons/search.png</iconset>
+   </property>
+   <property name="text">
+    <string>Search</string>
+   </property>
+  </action>
+  <action name="actionOpenFolder">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/foldopen.png</normaloff>:/icons/icons/foldopen.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open Folder</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/exit.png</normaloff>:/icons/icons/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/help.png</normaloff>:/icons/icons/help.png</iconset>
+   </property>
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionText_editing">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Text editing</string>
+   </property>
+   <property name="toolTip">
+    <string>Allow token editing and sentence splitting</string>
+   </property>
+  </action>
+  <action name="actionGotoTree">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/goto.png</normaloff>:/icons/icons/goto.png</iconset>
+   </property>
+   <property name="text">
+    <string>gotoTree</string>
+   </property>
+  </action>
+  <action name="actionStartEditTiming">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/player_play.png</normaloff>:/icons/icons/player_play.png</iconset>
+   </property>
+   <property name="text">
+    <string>StartEditTiming</string>
+   </property>
+   <property name="toolTip">
+    <string>Start timing</string>
+   </property>
+  </action>
+  <action name="actionStopEditTiming">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/player_stop.png</normaloff>:/icons/icons/player_stop.png</iconset>
+   </property>
+   <property name="text">
+    <string>StopEditTiming</string>
+   </property>
+   <property name="toolTip">
+    <string>Stop timing now</string>
+   </property>
+  </action>
+  <action name="actionStopAtLastEdit">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/player_rew.png</normaloff>:/icons/icons/player_rew.png</iconset>
+   </property>
+   <property name="text">
+    <string>stopAtLastEdit</string>
+   </property>
+   <property name="toolTip">
+    <string>Stop timing at last edit time</string>
+   </property>
+  </action>
+  <action name="actionUnflagAllDeps">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/apply.png</normaloff>:/icons/icons/apply.png</iconset>
+   </property>
+   <property name="text">
+    <string>unflagAllDeps</string>
+   </property>
+   <property name="toolTip">
+    <string>Unflag all dependencies</string>
+   </property>
+  </action>
+  <action name="actionDeleteAllFlaggedDeps">
+   <property name="icon">
+    <iconset resource="resfile.qrc">
+     <normaloff>:/icons/icons/trash.png</normaloff>:/icons/icons/trash.png</iconset>
+   </property>
+   <property name="text">
+    <string>deleteAllFlaggedDeps</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete all flagged dependencies</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DTreeWidget</class>
+   <extends>QWidget</extends>
+   <header>dtreewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TreeSetMenu</class>
+   <extends>QMenu</extends>
+   <header>treesetmenu</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resfile.qrc"/>
+ </resources>
+ <connections/>
+</ui>

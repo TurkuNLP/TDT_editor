@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="/icons" >
+    <file>icons/trash.png</file>
+    <file>icons/apply.png</file>
+    <file>icons/player_play.png</file>
+    <file>icons/player_rew.png</file>
+    <file>icons/player_stop.png</file>
+    <file>icons/goto.png</file>
+    <file>icons/1leftarrow.png</file>
+    <file>icons/1rightarrow.png</file>
+    <file>icons/2leftarrow.png</file>
+    <file>icons/2rightarrow.png</file>
+    <file>icons/babelfish.png</file>
+    <file>icons/exit.png</file>
+    <file>icons/fileclose.png</file>
+    <file>icons/filesave.png</file>
+    <file>icons/filesaveall.png</file>
+    <file>icons/filesopen.png</file>
+    <file>icons/foldopen.png</file>
+    <file>icons/help.png</file>
+    <file>icons/save_all.png</file>
+    <file>icons/search.png</file>
+  </qresource>
+</RCC>
