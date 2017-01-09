@@ -16,8 +16,6 @@ try:
         sys.exit(1)
     if pyMin=="6":
         import dtreebank.core.search.pybin26.swiiface as swi
-    elif pyMin=="5" and platform.system()=="Linux":
-        import dtreebank.core.search.pybin25.swiiface as swi
     elif pyMin=="7" and platform.system()=="Linux":
         import dtreebank.core.search.pybin27.swiiface as swi
     else:
@@ -27,7 +25,7 @@ except:
     print >> sys.stderr, "API version:",sys.api_version
     print >> sys.stderr, "Python version:",sys.version_info
     print >> sys.stderr
-    if pyMin in ("56"): #Supported version, not working...
+    if pyMin in ("67"): #Supported version, not working...
         print >> sys.stderr, "Importing the SWI interface module did not succeed, even though your version of Python should be supported. Try to see if you can re-compile using the information in the README file and let me (ginter@cs.utu.fi) know how it went and whether you need help. Sorry for the trouble."
     else:
         print >> sys.stderr, "There is no pre-compiled version of the swiiface module for python versions other than 2.5 and 2.6. You need to compile swiiface yourself (see the README files) and place the resulting .so file (on linux) or .pyd file (on Windows) to the main directory of the Annotator program. Then try to re-start."
