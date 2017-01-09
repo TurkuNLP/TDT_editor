@@ -67,7 +67,7 @@ class FileNameAction(QAction):
 class TreeSetEditor(QMainWindow):
     # Filename filter for "open file" dialogs. Alternatives
     # are separated by two semicolons.
-    openFileFilenameFilter = "Annotator XML files (*.xml);; Tab-delimited files (*.conll09 *.conllx *.conll *.conllu *.txt)"
+    openFileFilenameFilter = "Tab-delimited files (*.conll09 *.conllx *.conll *.conllu *.txt);; Annotator XML files (*.xml)"
 
     def __init__(self,fileList=[],parent=None):
         QMainWindow.__init__(self,parent)
