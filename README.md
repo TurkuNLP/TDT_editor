@@ -1,6 +1,8 @@
+This is the software used to annotate the Turku Dependency Treebank.
+
 The program has been tested and works on an off-the-shelf Ubuntu
 system, if you follow the instructions below (i.e. install PyQT4 and
-PCRE directly from the system repositories)
+PCRE directly from the system repositories).
 
 RUNNING:
 

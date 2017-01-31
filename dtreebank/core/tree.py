@@ -327,6 +327,8 @@ class Tree (object):
                 assert newG!=newD and newType
                 if (newG,newD,newType) not in self.deps:
                     dep=Dep(newG,newD,newType)
+                    if newType in ("cophead","cophead:own"):
+                        dep.flags=["L2"]
                     self.deps[(newG,newD,newType)]=dep
                     self.eh.depChange((oldG,oldD,oldType,newG,newD,newType))
                     editRecorded=True
