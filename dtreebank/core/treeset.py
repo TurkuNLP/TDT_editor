@@ -356,7 +356,7 @@ class TreeSet (object):
             self.dirty=False
         elif self.fileName.lower().endswith(".conllu"):
             out=open(self.fileName,"w")
-            print >> sys.stderr, "Saving into", self.fileName+".bak"
+            print >> sys.stderr, "Saving into", self.fileName
             self.save_conllu(out)
             out.close()
 

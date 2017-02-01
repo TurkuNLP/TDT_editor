@@ -789,7 +789,7 @@ class Tree (object):
                  #..and now make sure the rest is in canonical order because it goes to the DEPS field
             if not dheads:
                 continue
-            dheads.sort(key=lambda d: (d.gov,d.type))
+            dheads.sort(key=lambda d: (d.gov,d.type.lower()))
             cols[idx][8]=u"|".join(unicode(d.gov+1)+u":"+d.type for d in dheads)
         for g,d,t in converted_deps:
             print >> out, "#visual-style %d %d %s\tcolor:red"%(g,d,t)
