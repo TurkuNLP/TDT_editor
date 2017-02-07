@@ -288,6 +288,18 @@ class Tree (object):
                     dep.flags.append(u"CCSU")
                 else:
                     dep.flags.append(u"CCSU")
+            elif flagName==u"layer":
+                #Hopefully this is now bulletproof
+                if u"L1" in dep.flags and u"L2" in dep.flags:
+                    dep.flags.remove(u"L2")
+                elif u"L1" not in dep.flags and u"L2" not in dep.flags:
+                    dep.flags.append(u"L1")
+                elif u"L1" in dep.flags:
+                    dep.flags.remove(u"L1")
+                    dep.flags.append(u"L2")
+                elif u"L2" in dep.flags:
+                    dep.flags.remove(u"L2")
+                    dep.flags.append(u"L1")
             else:
                 dep.flags.append(flagName)
                 self.eh.toggleFlag((g,d,t,flagName,"+"))

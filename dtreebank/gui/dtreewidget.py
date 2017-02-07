@@ -529,8 +529,7 @@ class DTreeWidget(QWidget):
                 editList=[]
                 for dep in selectedDeps:
                     g,d,t=dep.id
-                    editList.append((g,d,t,u"L1"))
-                    editList.append((g,d,t,u"L2"))
+                    editList.append((g,d,t,u"layer"))
                 self.regenPreselects()
                 self.model.editToggleFlag(editList,self.context)
         elif PB and e.key()==Qt.Key_J: #Jump conj
