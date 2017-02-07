@@ -11,7 +11,7 @@ setup={"depsFile":"depTypes"}
 setupPB={"treePaneAlert":False,"textEdit":False}
 setupTDT={"treePaneAlert":True,"textEdit":False}
 setupSD={"depsFile":"depTypes.sd","treePaneAlert":False,"textEdit":False,"history_suffix":""}
-setupUD={"depsFile":"depTypes","treePaneAlert":False,"textEdit":False,"history_suffix":"U"}
+setupUD={"depsFile":"depTypes","treePaneAlert":True,"textEdit":False,"history_suffix":"U"}
 setupUDF={"depsFile":"depTypes","treePaneAlert":False,"textEdit":False,"history_suffix":"F"}
 
 def parseOptions():

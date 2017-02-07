@@ -214,10 +214,12 @@ class Tree (object):
         isComplete=False
 
         headCount=[0 for x in self.tokens]
-        for g,d,t in self.deps.keys():
+        for (g,d,t),dep in self.deps.iteritems():
             if t in self.technicalDeps:
                 continue
-            headCount[d]+=1
+            print self.layer(dep), dep.flags
+            if self.layer(dep)==1:
+                headCount[d]+=1
         for g,d,t in self.deps.keys():
             if t=="name":
                 if g>d:
@@ -327,6 +329,7 @@ class Tree (object):
                 assert newG!=newD and newType
                 if (newG,newD,newType) not in self.deps:
                     dep=Dep(newG,newD,newType)
+                    dep.flags=["L1"]
                     if newType in ("cophead","cophead:own"):
                         dep.flags=["L2"]
                     self.deps[(newG,newD,newType)]=dep
