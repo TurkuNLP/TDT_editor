@@ -217,7 +217,6 @@ class Tree (object):
         for (g,d,t),dep in self.deps.iteritems():
             if t in self.technicalDeps:
                 continue
-            print self.layer(dep), dep.flags
             if self.layer(dep)==1:
                 headCount[d]+=1
         for g,d,t in self.deps.keys():
