@@ -769,6 +769,13 @@ class DepGItem (QGraphicsItem):
             self.linePen.setDashPattern([3,3])
             self.lineBrush.setColor(Qt.blue)
             self.typeBrush.setColor(Qt.blue)
+
+
+        if self.dType.startswith(u"PB") or self.dType.startswith(u"<PB"):
+            self.linePen.setDashPattern([3,3])
+            self.lineBrush.setColor(Qt.gray)
+            self.typeBrush.setColor(Qt.gray)
+
         
         self.linePen.setBrush(self.lineBrush)
 
