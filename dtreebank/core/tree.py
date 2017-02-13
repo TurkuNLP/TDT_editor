@@ -219,15 +219,15 @@ class Tree (object):
                 continue
             if self.layer(dep)==1:
                 headCount[d]+=1
-        for g,d,t in self.deps.keys():
-            if t=="name":
-                if g>d:
-                    beg,end=d,g
-                else:
-                    beg,end=g+1,d+1
-                for tIdx in range(beg,end):
-                    if headCount[tIdx]==0:
-                        headCount[tIdx]=1
+        # for g,d,t in self.deps.keys():
+        #     if t=="name":
+        #         if g>d:
+        #             beg,end=d,g
+        #         else:
+        #             beg,end=g+1,d+1
+        #         for tIdx in range(beg,end):
+        #             if headCount[tIdx]==0:
+        #                 headCount[tIdx]=1
         for x in headCount:
             if x>1:
                 isTree=False
