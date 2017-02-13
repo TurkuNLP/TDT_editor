@@ -362,6 +362,8 @@ class Tree (object):
 
     def editAddNullToken(self,atIdx,context=u"generic"):
         newT=Token()
+        print self.tokens[atIdx].posTags
+        newT.posTags=[[True,u"fixme",u"XX|XX|XX",[]]]
         if atIdx==0:
             newT.charOff=[(0,0)]
         else:
