@@ -177,10 +177,10 @@ class Tree (object):
         for tIdx,token in enumerate(self.tokens):
             for cg,base,rawTags,allTags in token.posTags:
                 outLines.append(u"twolreading(%d,%d,%d,'%s',[%s])."%(plTsetIdx,plId,tIdx,PLEsc(base),\
-                                                                         u",".join(u"'"+PLEsc(tag)+u"'" for tag in rawTags.split())))
+                                                                         u",".join(u"'"+PLEsc(tag)+u"'" for tag in rawTags.split(u"|"))))
                 if cg:
                     outLines.append(u"cgreading(%d,%d,%d,'%s',[%s])."%(plTsetIdx,plId,tIdx,PLEsc(base),\
-                                                                         u",".join(u"'"+PLEsc(tag)+u"'" for tag in rawTags.split())))
+                                                                         u",".join(u"'"+PLEsc(tag)+u"'" for tag in rawTags.split(u"|"))))
             for tag in token.flags:
                 hasSense=False
                 if tag.startswith(u"SENSE"):
